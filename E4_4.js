@@ -1,46 +1,35 @@
 //Задание 4.
 
-function ElectricalAppliance (name, manufacturer, power, turn ){
-    this.name= name,
-    this.turn = function(){console.log(`The ${this.name} is switched ${turn}.`)}
-    this.power = function(){console.log(`Power Consumption of the ${this.name} is ${power} W.`)}
-    this.manufacturer = function(){
-      
-      console.log(`The ${name} is manufacturied by ${manufacturer}.`)
-    }
-  }
-  
-  const iron1 = new ElectricalAppliance('iron', 'Tefal');
-  const power  = new ElectricalAppliance('iron', '', 650);
-  const turn = new ElectricalAppliance('iron', '', '', 'on');
-  iron1.manufacturer();
-  power.power();
-  turn.turn();
-  
-  
-  function Lighting (name, manufacturer, power, led){
-    this.name= name,
-    this.led = function(){console.log(`The ${this.name} is ${led}.`)}
-    this.manufacturer = function(){console.log(`The ${this.name} is manufacturied by ${manufacturer}.`)}
-    this.power = function(){console.log(`Electricity consumption of the ${this.name} is ${power} W.`)}
-  }
-  
-  const lamp1 = new Lighting('lamp', 'IKEA');
-  const power1  = new Lighting('lamp','', 50);
-  const led = new Lighting('lamp','', '', 'LED');
-  power1.power();
-  lamp1.manufacturer();
-  led.led();
-  
-  
-  function PC (name, manufacturer, display, power){
-    this.name= name,
-    this.display = display,
-    this.power = power,
-    this.manufacturer = function(){console.log(`The ${this.name} is manufacturied by ${manufacturer}. 
-    Display is ${this.display}'. Power is ${this.power} W.`)}
-  }
-  
-  const comp = new PC('computer', 'IBM', 17, 220);
-  
-  comp.manufacturer();
+function ElectricalAppliance(name) {
+	this.device = 'household electrical appliance',
+	this.name = name
+	
+}
+
+ElectricalAppliance.prototype.getPowerConsumption = function (power, t, on) {
+	let turnOn = on;
+	if(on === 1){
+		turnOn = 'Вкл';
+	}else{
+		turnOn = 'Выкл';
+	};
+	
+
+	console.log(`Расход эл. энергии ${this.name} за ${t} час. = ${power * t}Вт. ${this.name}: ${turnOn}`);
+};
+
+function Characteristic(name, color) {
+	this.name = name,
+	this.color = color
+}
+
+Characteristic.prototype = new ElectricalAppliance();
+
+const teapot = new Characteristic ('Teapot', 'black');
+const fridge = new Characteristic ('Fridge', 'red');
+const luminaire = new Characteristic ('Luminaire', 'green');
+
+console.log(teapot, fridge, luminaire);
+teapot.getPowerConsumption(700, 2);
+fridge.getPowerConsumption(500, 6, 1);
+luminaire.getPowerConsumption(60, 5, 1);

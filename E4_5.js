@@ -1,71 +1,37 @@
 //Задание 5.
 
 class ElectricalAppliance {
-    constructor(name, manufacturer) {
-        this.name = name;
-        this.manufacturer = manufacturer;
-    }
+	constructor(name) {
+		this.device = 'household electrical appliance';
+		this.name = name;
+	}
 
-    getInfo() {
-        return `The ${this.name} is manufacturied by ${this.manufacturer}.`
-    }
+	getPowerConsumption (power, t, on) {
+		let turnOn = on;
+		if(on === 1){
+			turnOn = 'Вкл';
+		}else{
+			turnOn = 'Выкл';
+		};
+		
+	
+		console.log(`Расход эл. энергии ${this.name} - (${this.color}) за ${t} час. = ${power * t}Вт. ${this.name}: ${turnOn}`);
+	}
 
-    getPowerConsumption = function (power) {
-        return `Power Consumption of the ${this.name} is ${power} W.`
-    }
-
-    getTurn = function (on_off) {
-        return `The ${this.name} is switched ${on_off}.`
-    }
 }
 
-
-class Lighting extends ElectricalAppliance {
-    constructor(name, manufacturer, typeOfLamp) {
-        super(name);
-        this.manufacturer = manufacturer
-        this.typeOfLamp = typeOfLamp;
-    }
-
-    getPowerConsumption = function (power) {
-        return `Electricity consumption of the ${this.name} is ${power} W.`
-    }
+class Characteristic extends ElectricalAppliance {
+	constructor (name, color) {
+		super(name);
+		this.color = color;
+	}
 }
 
-class PC extends ElectricalAppliance {
-    constructor(name, manufacturer, display) {
-        super(name);
-        this.manufacturer = manufacturer;
-        this.display = display;
-    }
+const teapot = new Characteristic ('Teapot', 'black');
+const fridge = new Characteristic ('Fridge', 'red');
+const luminaire = new Characteristic ('Luminaire', 'green');
 
-    getTurn = function (on_off) {
-        return `This ${this.name} is switched ${on_off}.`
-    }
-
-    getInfo() {
-        return `The ${this.name} is manufacturied by ${this.manufacturer}. Display is ${this.display}'.`
-    }
-}
-
-
-const iron = new ElectricalAppliance("iron", "Tefal");
-
-console.log(iron.getInfo());  // "The iron is manufacturied by Tefal."
-console.log(iron.getPowerConsumption(650));  // "Power Consumption of the iron is 650 W."
-console.log(iron.getTurn("on"));  // "The iron is switched on."
-// console.log(iron)
-
-
-const lamp = new Lighting("lamp", "IKEA", "LED");
-
-console.log(lamp.getInfo());  // "The lamp is manufacturied by IKEA."
-console.log(lamp.getPowerConsumption(20));  // "Electricity consumption of the lamp is 20 W."
-console.log(lamp.getTurn("off"));  // "The lamp is switched off."
-
-
-const computer = new PC("computer", "Toshiba", 17);
-
-console.log(computer.getInfo());  // "The computer is manufacturied by Toshiba. Display is 17'."
-console.log(computer.getPowerConsumption(220));  // "Power Consumption of the computer is 220 W."
-console.log(computer.getTurn("on"));  // "This computer is switched on."
+console.log(teapot, fridge, luminaire);
+teapot.getPowerConsumption(700, 2);
+fridge.getPowerConsumption(500, 6, 1);
+luminaire.getPowerConsumption(60, 5, 1);
